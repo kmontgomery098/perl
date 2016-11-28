@@ -2,27 +2,28 @@
 use strict;
 use warnings;
 
-
-
 sub protein{
 	my $filename=$_[1];
-	open (my $fh, "<", $filename) or die " '$filename' Nada";
+	print $filename;
+	open (my $fh, "<", $filename) or die "Nada";
 	my $substring= $_[0];
-	#my $sequence="";
+	print $substring;
+	my $header;
 	while (my $line = <$fh>) {
-		chomp $line; 
-		foreach (@substrings){
-			print $line;
+		if ($line=~m/^>/){
+			$header=$line;
+		}
+		if ($line=~m/(.*)$substring(.*)/){
+			print $header;
+		}	
 		}
 	}
+
+
+if ($ARGV[0] eq "-name_find"){ 
+	protein($ARGV[1],$ARGV[3])
 }
-
-
-	#while(<START>){
-		#if (index($sequence,$string)!=-1){
-			#if (m/^>/){
-				#$sequence.=$1;
-				#print $sequence."\n";
+	
  
 
 
